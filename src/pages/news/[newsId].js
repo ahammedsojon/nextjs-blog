@@ -70,16 +70,16 @@ NewsDetailsPage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:5000/news");
-  const allNews = await res.json();
-  const paths = allNews.map((news) => ({
-    params: { newsId: news.id },
-  }));
-  return { paths, fallback: false };
-};
+// export const getStaticPaths = async () => {
+//   const res = await fetch("http://localhost:5000/news");
+//   const allNews = await res.json();
+//   const paths = allNews.map((news) => ({
+//     params: { newsId: news.id },
+//   }));
+//   return { paths, fallback: false };
+// };
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { newsId } = context.params;
   const res = await fetch(`http://localhost:5000/news/${newsId}`);
   const data = await res.json();
